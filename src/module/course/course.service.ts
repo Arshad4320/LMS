@@ -1,0 +1,30 @@
+import { ICourse } from './course.interface'
+import { Course } from './course.model'
+
+const createCourseIntoDb = async (payload: ICourse) => {
+  const result = await Course.create(payload)
+  return result
+}
+const getAllCourseFromIntoDb = async () => {
+  const result = await Course.find()
+  return result
+}
+const getSingleCourseFromIntoDb = async (id: string) => {
+  const result = await Course.findOne({ id: id })
+  return result
+}
+const updateCourseFromIntoDb = async (id: string, payload: ICourse) => {
+  const result = await Course.findByIdAndUpdate(id, payload, { new: true })
+  return result
+}
+const deleteCourseFromIntoDb = async (id: string) => {
+  const result = await Course.findByIdAndDelete(id)
+  return result
+}
+export const courseServices = {
+  createCourseIntoDb,
+  getAllCourseFromIntoDb,
+  getSingleCourseFromIntoDb,
+  updateCourseFromIntoDb,
+  deleteCourseFromIntoDb,
+}

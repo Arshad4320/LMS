@@ -1,6 +1,5 @@
 import { Router } from 'express'
-import userRouter from '../module/user/user.index'
-import uploadRouter from '../module/fileUpload'
+import userRouter from '../module/course/course.index'
 
 const router = Router()
 
