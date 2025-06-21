@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
-import { courseServices } from './course.service'
+import { Course } from '../model/course.model'
+
 const createCourse = async (req: Request, res: Response) => {
   try {
-    const data = req.body
-    const result = await courseServices.createCourseIntoDb(data)
+    const result = await Course.create(req.body)
     res.json({
       success: true,
-      message: 'Course create successfully',
+      message: 'course create successfully',
       data: result,
     })
   } catch (err) {
@@ -15,10 +15,10 @@ const createCourse = async (req: Request, res: Response) => {
 }
 const getAllCourse = async (req: Request, res: Response) => {
   try {
-    const result = await courseServices.getAllCourseFromIntoDb()
+    const result = await Course.find()
     res.json({
       success: true,
-      message: 'all course data retrieved',
+      message: 'all course retrieved successfully',
       data: result,
     })
   } catch (err) {
@@ -28,10 +28,10 @@ const getAllCourse = async (req: Request, res: Response) => {
 const getSingleCourse = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
-    const result = await courseServices.getSingleCourseFromIntoDb(id)
+    const result = await Course.findById(id)
     res.json({
       success: true,
-      message: 'single course data retrieved',
+      message: 'single course retrieved successfully',
       data: result,
     })
   } catch (err) {
@@ -42,7 +42,7 @@ const updateCourse = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
     const data = req.body
-    const result = courseServices.updateCourseFromIntoDb(id, data)
+    const result = await Course.findByIdAndUpdate(id, data, { new: true })
     res.json({
       success: true,
       message: 'course update successfully',
@@ -55,17 +55,17 @@ const updateCourse = async (req: Request, res: Response) => {
 const deleteCourse = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
-    const result = courseServices.deleteCourseFromIntoDb(id)
+    const result = await Course.findByIdAndDelete(id)
     res.json({
       success: true,
       message: 'course delete successfully',
-      data: result,
+      result,
     })
   } catch (err) {
     console.log(err)
   }
 }
-export const courseController = {
+export const courseControllers = {
   createCourse,
   getAllCourse,
   getSingleCourse,

@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import courseRouter from '../module/course/course.index'
+
+import courseRouter from './../module/course/router/course.router'
 
 const router = Router()
 
