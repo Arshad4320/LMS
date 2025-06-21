@@ -38,7 +38,7 @@ const updateModule = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
     const data = req.body
-    const result = Module.findByIdAndUpdate(id, data)
+    const result = await Module.findByIdAndUpdate(id, data, { new: true })
     res.json({
       success: true,
       message: 'module update successfully',
@@ -51,7 +51,7 @@ const updateModule = async (req: Request, res: Response) => {
 const deleteModule = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
-    const result = await Module.findByIdAndDelete(id)
+    const result = await Module.findByIdAndDelete(id, { new: true })
     res.json({
       success: true,
       message: 'module deleted successfully',
