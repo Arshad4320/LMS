@@ -1,5 +1,5 @@
 import router from './course.router'
 
-const userRouter = router
+const courseRouter = router
 
-export default userRouter
+export default courseRouter

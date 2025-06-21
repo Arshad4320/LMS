@@ -10,15 +10,17 @@ const getAllCourseFromIntoDb = async () => {
   return result
 }
 const getSingleCourseFromIntoDb = async (id: string) => {
-  const result = await Course.findOne({ id: id })
+  const result = await Course.findOne({ _id: id })
   return result
 }
 const updateCourseFromIntoDb = async (id: string, payload: ICourse) => {
-  const result = await Course.findByIdAndUpdate(id, payload, { new: true })
+  const result = await Course.findByIdAndUpdate({ _id: id }, payload, {
+    new: true,
+  })
   return result
 }
 const deleteCourseFromIntoDb = async (id: string) => {
-  const result = await Course.findByIdAndDelete(id)
+  const result = await Course.findByIdAndDelete({ _id: id }, { new: true })
   return result
 }
 export const courseServices = {

@@ -8,7 +8,7 @@ const courseSchema = new Schema<ICourse>(
       required: true,
     },
     thumbnail: {
-      type: File,
+      type: String,
     },
     price: {
       type: Number,

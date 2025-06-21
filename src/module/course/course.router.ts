@@ -1,9 +1,12 @@
 import { Router } from 'express'
-import { createUser } from './course.controller'
-import { verifyCourse } from './course.validation'
+import { courseController } from './course.controller'
 
 const router = Router()
 
-router.post('/register', verifyCourse, createUser)
+router.post('/create-course', courseController.createCourse)
+router.get('/', courseController.getAllCourse)
+router.get('/:id', courseController.getSingleCourse)
+router.patch('/update-course/:id', courseController.updateCourse)
+router.delete('/delete-course/:id', courseController.deleteCourse)
 
 export default router

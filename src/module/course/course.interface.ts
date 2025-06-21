@@ -1,6 +1,6 @@
 export type ICourse = {
   title: string
-  thumbnail?: File
+  thumbnail?: string
   price: number
   description: string
 }
