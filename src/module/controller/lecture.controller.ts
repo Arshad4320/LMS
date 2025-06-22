@@ -25,70 +25,31 @@ const createLecture = async (req: Request, res: Response) => {
   }
 }
 
-// const getLectures = async (req: Request, res: Response) => {
-//   try {
-//     const { moduleId, courseId } = req.query
-
-//     const filter: any = {}
-//     if (moduleId) filter.moduleId = moduleId
-
-//     const lectures = await Lecture.find(filter).populate({
-//       path: 'moduleId',
-//       match: courseId ? { courseId } : {},
-//     })
-
-//     const result = lectures.filter(l => l.moduleId !== null)
-
-//     res.status(200).json({
-//       success: true,
-//       message: 'lecture successfully retrieved',
-//       data: result,
-//     })
-//   } catch (err) {
-//     console.error(err)
-//     res.status(500).json({
-//       success: false,
-//       message: 'Failed to retrieve lectures',
-//       error: err,
-//     })
-//   }
-// }
-
-export const getLectures = async (req: Request, res: Response) => {
+const getLectures = async (req: Request, res: Response) => {
   try {
-    // query থেকে courseId ও moduleId নেয়া
-    const courseId = req.query.courseId?.toString()
-    const moduleId = req.query.moduleId?.toString()
+    const { moduleId, courseId } = req.query
 
-    // filter তৈরী
-    let filter: any = {}
-    if (moduleId) {
-      filter.moduleId = moduleId
-    }
+    const filter: any = {}
+    if (moduleId) filter.moduleId = moduleId
 
-    // Lecture গুলো পাওয়া
-    let lectures = await Lecture.find(filter).populate('moduleId')
+    const lectures = await Lecture.find(filter).populate({
+      path: 'moduleId',
+      match: courseId ? { courseId } : {},
+    })
 
-    // যদি courseId দেয়া থাকে, তাহলে moduleId এর courseId দিয়ে filter করব
-    if (courseId) {
-      lectures = lectures.filter(
-        lecture =>
-          lecture.moduleId && lecture.moduleId.courseId.toString() === courseId,
-      )
-    }
+    const result = lectures.filter(l => l.moduleId !== null)
 
-    // response পাঠানো
     res.status(200).json({
       success: true,
-      message: 'Lectures retrieved successfully',
-      data: lectures,
+      message: 'lecture successfully retrieved',
+      data: result,
     })
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
     res.status(500).json({
       success: false,
-      message: 'Failed to fetch lectures',
-      error,
+      message: 'Failed to retrieve lectures',
+      error: err,
     })
   }
 }

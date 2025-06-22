@@ -1,16 +1,35 @@
 import { Request, Response } from 'express'
 import { Course } from '../model/course.model'
+import { uploadToCloudinary } from '../../utilits/cloudinary'
 
 const createCourse = async (req: Request, res: Response) => {
   try {
-    const result = await Course.create(req.body)
+    const { title, description, price } = req.body
+    const file = req.file
+
+    let imageUrl = ''
+    if (file) {
+      imageUrl = (await uploadToCloudinary(
+        file.buffer,
+        file.originalname,
+      )) as string
+    }
+
+    const result = await Course.create({
+      title,
+      description,
+      price,
+      thumbnail: imageUrl,
+    })
+
     res.json({
       success: true,
-      message: 'course create successfully',
+      message: 'course created successfully',
       data: result,
     })
   } catch (err) {
     console.log(err)
+    res.status(500).json({ error: 'Something went wrong' })
   }
 }
 const getAllCourse = async (req: Request, res: Response) => {
