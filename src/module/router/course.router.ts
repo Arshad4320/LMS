@@ -11,7 +11,11 @@ router.post(
 )
 router.get('/', courseControllers.getAllCourse)
 router.get('/:id', courseControllers.getSingleCourse)
-router.patch('/update-course/:id', courseControllers.updateCourse)
+router.patch(
+  '/update-course/:id',
+  upload.single('thumbnail'),
+  courseControllers.updateCourse,
+)
 router.delete('/delete-course/:id', courseControllers.deleteCourse)
 
 export default router
