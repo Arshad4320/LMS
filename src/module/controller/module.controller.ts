@@ -34,6 +34,34 @@ const getAllModuleByCourse = async (req: Request, res: Response) => {
     console.log(err)
   }
 }
+const getSingleModule = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id
+
+    const result = await Module.findById(id)
+
+    res.json({
+      success: true,
+      message: 'module retrieve successfully',
+      data: result,
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+const getAllModule = async (req: Request, res: Response) => {
+  try {
+    const result = await Module.find()
+    res.json({
+      success: true,
+      message: 'get all module',
+      data: result,
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const updateModule = async (req: Request, res: Response) => {
   try {
     const id = req.params.id
@@ -65,6 +93,8 @@ const deleteModule = async (req: Request, res: Response) => {
 export const moduleController = {
   createModule,
   getAllModuleByCourse,
+  getAllModule,
   updateModule,
   deleteModule,
+  getSingleModule,
 }
