@@ -4,6 +4,8 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
+
+
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "start": "node app.js",
     "build": "tsc",
@@ -18,7 +20,7 @@
   "lint-staged": {
     "src/**/*.ts": "npm run lint-prettier"
   },
-  "keywords": [],
+  "keywords": [ ],
   "author": "Arshad Ullah",
   "license": "ISC",
   "dependencies": {
