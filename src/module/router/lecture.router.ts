@@ -11,7 +11,7 @@ router.post(
   lectureController.createLecture,
 )
 router.get('/:moduleId', lectureController.getLectures)
-
+router.get('/', lectureController.getLectures)
 router.put(
   '/update-lecture/:id',
   upload.array('pdfNotes', 5),

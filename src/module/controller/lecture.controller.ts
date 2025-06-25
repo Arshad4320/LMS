@@ -53,7 +53,18 @@ const getLectures = async (req: Request, res: Response) => {
     })
   }
 }
-
+const getAllLectures = async (req: Request, res: Response) => {
+  try {
+    const result = await Lecture.find()
+    res.json({
+      success: true,
+      message: 'find all lecture',
+      data: result,
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
 const updateLecture = async (req: Request, res: Response) => {
   try {
     const { title, videoUrl } = req.body
@@ -94,4 +105,5 @@ export const lectureController = {
   getLectures,
   updateLecture,
   deleteLecture,
+  getAllLectures,
 }
