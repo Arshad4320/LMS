@@ -15,6 +15,6 @@ app.get('/', (req: Request, res: Response) => {
   })
 })
 
-app.use('https://lms-1nc6.onrender.com', router)
+app.use('/api/v1', router)
 
 export default app
