@@ -1,5 +1,5 @@
 {
-  "name": "LMS-Learning Management Sysetem",
+  "name": "lms-learning-management-System",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
