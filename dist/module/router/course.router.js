@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const course_controller_1 = require("../controller/course.controller");
+const uploade_1 = require("../../middleware/uploade");
+const router = (0, express_1.Router)();
+router.post('/create-course', uploade_1.upload.single('thumbnail'), course_controller_1.courseControllers.createCourse);
+router.get('/', course_controller_1.courseControllers.getAllCourse);
+router.get('/:id', course_controller_1.courseControllers.getSingleCourse);
+router.patch('/update-course/:id', uploade_1.upload.single('thumbnail'), course_controller_1.courseControllers.updateCourse);
+router.delete('/delete-course/:id', course_controller_1.courseControllers.deleteCourse);
+exports.default = router;

@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const lecture_controller_1 = require("../controller/lecture.controller");
+const uploader_1 = require("../../utilits/uploader");
+const router = (0, express_1.Router)();
+router.post('/create-lecture', uploader_1.upload.array('pdfNotes', 5), lecture_controller_1.lectureController.createLecture);
+router.get('/:moduleId', lecture_controller_1.lectureController.getLectures);
+router.get('/', lecture_controller_1.lectureController.getLectures);
+router.put('/update-lecture/:id', uploader_1.upload.array('pdfNotes', 5), lecture_controller_1.lectureController.updateLecture);
+router.delete('/delete-lecture/:id', lecture_controller_1.lectureController.deleteLecture);
+exports.default = router;

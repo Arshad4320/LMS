@@ -11,7 +11,7 @@ app.use(express.json())
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send({
     success: true,
-    message: 'Book Store Server Is Running',
+    message: 'LMS Server Is Running',
   })
 })
 
